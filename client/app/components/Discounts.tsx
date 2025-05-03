@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
-import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
-import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined';
+import WestIcon from '@mui/icons-material/West';
+import EastIcon from '@mui/icons-material/East';
 import { data } from '../dummyData';
 // Adjust path as needed
 
@@ -44,16 +44,16 @@ const Discounts = () => {
           <button
             onClick={handlePrev}
             disabled={currentSlide === 0}
-            className="p-2 rounded bg-gray-200 disabled:opacity-50"
+            className="p-2 w-[40px] h-[40px] flex justify-center items-center rounded-[50%] bg-gray-200 disabled:opacity-50"
           >
-            <ArrowBackIosOutlinedIcon />
+            <WestIcon fontSize="small" />
           </button>
           <button
             onClick={handleNext}
             disabled={currentSlide === maxSlide}
-            className="p-2 rounded bg-gray-200 disabled:opacity-50"
+            className="p-2 w-[40px] h-[40px] flex justify-center items-center rounded-[50%] bg-gray-200 disabled:opacity-50"
           >
-            <ArrowForwardIosOutlinedIcon />
+            <EastIcon fontSize="small" />
           </button>
         </div>
       </div>
