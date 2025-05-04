@@ -33,9 +33,29 @@ export const addRestaurant = async (req, res) => {
 }
 
 export const getAllRestaurants = async (req, res) => {
-  try {
-    const restaurants = await prisma.restaurant.findMany({})
+  const { sort, search } = req.query
 
+  let orderBy = { createdAt: 'desc' }
+
+  if (sort === 'highest-rated') orderBy = { rating: 'desc' }
+  if (sort === 'most-rated') orderBy = { reviewCount: 'desc' }
+  if (sort === 'newest') orderBy = { createdAt: 'desc' }
+  if (sort === 'oldest') orderBy = { createdAt: 'asc' }
+  try {
+    const restaurants = await prisma.restaurant.findMany({
+      where: search
+        ? {
+            name: {
+              contains: String(search),
+              mode: 'insensitive',
+            },
+          }
+        : undefined,
+      orderBy,
+      include: {
+        reviews: true,
+      },
+      })
     res.status(201).json({
       success: true,
       message: "Restaurants fetched",
