@@ -20,7 +20,7 @@ export interface Restaurant {
   name: string;
   rating?: number;
   createdAt?: string;
-  popularity?: number;
+  reviewCount?: number;
   // add other product fields if necessary
 };
 
@@ -96,7 +96,7 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
           )
           break;
         case 'most-popular':
-          filtered.sort((a, b) => (b?.popularity ?? 0) - (a?.popularity ?? 0));
+          filtered.sort((a, b) => (b?.reviewCount ?? 0) - (a?.reviewCount ?? 0));
           break;
         default:
           break;

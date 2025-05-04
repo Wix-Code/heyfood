@@ -1,6 +1,6 @@
 import { Restaurant } from "./utils/context"
 
-export const data: Restaurant[] = [
+export const data = [
   {
     id: 1,
     img: "https://www.precisionorthomd.com/wp-content/uploads/2023/10/percision-blog-header-junk-food-102323.jpg",

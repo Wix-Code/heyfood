@@ -1,18 +1,20 @@
-import { PrismaClient } from '@prisma/client'
-import { Request, Response } from 'express'
+import prisma from "../utils/PrismaController.js"
 
-const prisma = new PrismaClient()
 
 export const addReview = async (req, res) => {
   const restaurantId = parseInt(req.params.id)
   const { rating, comment } = req.body
 
+
+  if (!restaurantId) {
+    return res.status(400).json({ error: "Invalid or missing restaurantId" });
+  }
   try {
     const review = await prisma.review.create({
       data: {
         rating,
         comment,
-        restaurantId,
+        restaurantId
       },
     })
 
@@ -31,7 +33,8 @@ export const addReview = async (req, res) => {
     })
 
     res.status(201).json({ message: 'Review added', review })
-  } catch (err) {
+  } catch (error) {
+    console.log(error)
     res.status(500).json({ error: 'Failed to add review' })
   }
 }
