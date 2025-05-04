@@ -16,6 +16,7 @@ const AllRestaurants = () => {
                 <p className='font-[600] text-[17px]'>{product.title}</p>
                 <p className='text-[#757575] text-[14px]'>{product.foods}</p>
                 <p className='text-[15px]'>4.2 • 6607+ Ratings</p>
+                <p>{product.rating}</p>
               </div>
             )
           })

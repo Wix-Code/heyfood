@@ -2,13 +2,16 @@ import prisma from "../utils/PrismaController.js"
 
 export const addRestaurant = async (req, res) => {
   try {
-    const { name, img, foods, openHour, closeHour } = req.body
+    const { name, img, shop, openHour, discount, partyJellof, freeDrink, closeHour } = req.body
     
-    const restaurant = await prisma.re.create({
+    const restaurant = await prisma.restaurant.create({
       data: {
-        name,
+        shop,
         img,
-        foods,
+        name,
+        discount,
+        freeDrink,
+        partyJellof,
         openHour,
         closeHour
       }

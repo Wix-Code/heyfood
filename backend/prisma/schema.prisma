@@ -23,14 +23,17 @@ model Catergory {
 model Restaurant {
   id    Int   @id @default(autoincrement())
   img   String
+  shop  String
   name  String
-  food  String
   rating      Float    @default(0)
   reviewCount Int      @default(0)
   createdAt   DateTime @default(now())
   reviews     Review[]
-  openHour    DateTime?
-  closeHour    DateTime?
+  openHour    String?
+  closeHour    String?
+  discount    String?
+  freeDrink   Boolean
+  partyJellof Boolean
 }
 
 model Review {

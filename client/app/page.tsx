@@ -59,15 +59,23 @@ const page = () => {
 
 export default page */
 "use client"
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import { component, data } from './dummyData';
 import Discounts from './components/Discounts';
 import AllRestaurants from './components/AllRestaurants';
+import { contextApi } from './utils/context';
 
 
 const Page = () => {
-  const [filterCategory, setFilterCategory] = useState<string | null>(null);;
+  const context = useContext(contextApi);
+    
+  if (!context) {
+    throw new Error('MyComponent must be used within a ContextProvider');
+  }
+
+  const { filteredProducts, handleSortChange, handleCardClick, filterCategory, sortedBy } = context;
+  /*const [filterCategory, setFilterCategory] = useState<string | null>(null);;
   const [sortedBy, setSortedBy] = useState(null);
 
   const handleCardClick = (category : any) => {
@@ -103,16 +111,16 @@ const Page = () => {
         default:
           break;
       }
-    }*/
+    }
 
     return filtered;
   };
 
-  const filteredProducts = getFilteredProducts();
+  const filteredProducts = getFilteredProducts(); */
 
   return (
     <div>
-      <div className='flex max-w-[1200px] max-sm:mx-5 m-auto items-center my-6 gap-5'>
+      <div className='flex max-w-[1200px] max-lg:mx-5 m-auto items-center my-6 gap-5'>
         <button className='bg-[#000000] font-[600] cursor-pointer px-8 py-4 rounded-[30px] text-[#FFFFFF]'>Restaurants</button>
         <button>Grocery</button>
       </div>
@@ -145,6 +153,7 @@ const Page = () => {
                   <FormControlLabel value="most-popular" control={<Radio size="small" />} label="Most Popular" />
                   <FormControlLabel value="highest" control={<Radio size="small" />} label="Highest rate" />
                   <FormControlLabel value="newest" control={<Radio size="small" />} label="Newest" />
+                  <FormControlLabel value="newest" control={<Radio size="small" />} label="Newest" />
                 </RadioGroup>
               </FormControl>
             </div>
@@ -165,6 +174,7 @@ const Page = () => {
                   <p className='font-[600] text-[17px]'>{product.title}</p>
                   <p className='text-[#757575] text-[14px]'>{product.foods}</p>
                   <p className='text-[15px]'>4.2 • 6607+ Ratings</p>
+                  <p>{product.rating}</p>
                 </div>
               ))}
             </div>

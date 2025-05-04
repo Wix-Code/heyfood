@@ -1,12 +1,41 @@
-"use client"
+'use client';
 
-import React, { createContext, useState, ReactNode, Dispatch, SetStateAction } from 'react';
+import React, {
+  createContext,
+  useState,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+} from 'react';
+import { data } from '../dummyData';
+
+export interface Restaurant {
+  id: number;
+  img: string;
+  title: string;
+  foods: string;
+  deliveryFee: string;
+  name: string;
+  rating?: number;
+  createdAt?: string;
+  popularity?: number;
+  // add other product fields if necessary
+};
+
+type SortOption = 'highest' | 'newest' | 'most-popular' | null;
 
 interface AppContextType {
   openSearch: boolean;
   setOpenSearch: Dispatch<SetStateAction<boolean>>;
   openSearchMobile: boolean;
   setOpenSearchMobile: Dispatch<SetStateAction<boolean>>;
+  filteredProducts: Restaurant[];
+  filterCategory: string | null;
+  setFilterCategory: Dispatch<SetStateAction<string | null>>;
+  sortedBy: SortOption;
+  setSortedBy: Dispatch<SetStateAction<SortOption>>;
+  handleSortChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCardClick: (category: string) => void;
 }
 
 export const contextApi = createContext<AppContextType | null>(null);
@@ -18,9 +47,72 @@ interface ContextProviderProps {
 const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
   const [openSearch, setOpenSearch] = useState(false);
   const [openSearchMobile, setOpenSearchMobile] = useState(false);
+  const [filterCategory, setFilterCategory] = useState<string | null>(null);
+  const [sortedBy, setSortedBy] = useState<SortOption>(null);
+
+  const handleCardClick = (category: string) => {
+    setFilterCategory(category);
+    setSortedBy(null);
+  };
+
+  const handleSortChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSortedBy(e.target.value as SortOption);
+    setFilterCategory(null);
+  };
+
+  const getFilteredProducts = (): Restaurant[] => {
+    let filtered = [...data];
+  
+    if (filterCategory) {
+      filtered = filtered.filter(
+        (item) =>
+          filterCategory &&
+          item.name?.toLowerCase() === filterCategory.toLowerCase()
+      );
+    }
+  
+    if (sortedBy) {
+      switch (sortedBy) {
+        case 'highest':
+          filtered.sort((a, b) => (b?.rating ?? 0) - (a?.rating ?? 0));
+          break;
+        case 'newest':
+          filtered.sort(
+            (a, b) =>
+              new Date(b.createdAt ?? 0).getTime() -
+              new Date(a.createdAt ?? 0).getTime()
+          );
+          break;
+        case 'most-popular':
+          filtered.sort((a, b) => (b?.popularity ?? 0) - (a?.popularity ?? 0));
+          break;
+        default:
+          break;
+      }
+    }
+  
+    return filtered;
+  };
+  
+
+  const filteredProducts = getFilteredProducts();
 
   return (
-    <contextApi.Provider value={{ openSearch, setOpenSearch, openSearchMobile, setOpenSearchMobile }}>
+    <contextApi.Provider
+      value={{
+        openSearch,
+        setOpenSearch,
+        openSearchMobile,
+        setOpenSearchMobile,
+        filteredProducts,
+        filterCategory,
+        setFilterCategory,
+        sortedBy,
+        setSortedBy,
+        handleSortChange,
+        handleCardClick,
+      }}
+    >
       {children}
     </contextApi.Provider>
   );
