@@ -1,6 +1,6 @@
 import express from "express"
 import categoryRoute from "./routes/category.routes.js"
-import productsRoute from "./routes/products.routes.js"
+import productsRoute from "./routes/restaurants.routes.js"
 
 const app = express()
 app.use(express.json());

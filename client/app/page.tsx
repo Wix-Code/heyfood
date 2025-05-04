@@ -119,11 +119,11 @@ const Page = () => {
       <hr className='h-[1px] mb-6 w-full bg-[#f3f3f3] border-0' />
 
       {/* Filter Cards */}
-      <div className='flex hide-scrollbar max-w-[1200px] max-lg:mx-5 overflow-x-scroll m-auto justify-between items-center'>
+      <div className='flex hide-scrollbar max-w-[1200px] max-lg:mx-5 overflow-x-scroll m-auto justify-between gap-2 items-center'>
         {component.map((item) => (
-          <div key={item.id} className='p-4 hover:bg-[#f7f7f7] flex flex-col justify-center items-center gap-2 cursor-pointer' onClick={() => handleCardClick(item.name)}>
-            <img className='w-[60px]' src={item.img} alt={item.name} />
-            <p className='text-center text-[13px] font-bold tracking-[1px]'>{item.name}</p>
+          <div key={item.id} className='w-fit p-3 max-sm:p-4 hover:bg-[#f7f7f7] flex flex-col justify-center items-center gap-2 bg-[#d4d4d4] max-xl:hover:bg-[#f7f7f7] cursor-pointer' onClick={() => handleCardClick(item.name)}>
+            <img className='w-[40px] h-[40px] object-cover' src={item.img} alt={item.name} />
+            <p className='text-center max-sm:text-[11px] text-[13px] font-bold tracking-[1px]'>{item.name}</p>
           </div>
         ))}
       </div>

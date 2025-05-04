@@ -20,10 +20,24 @@ model Catergory {
   name  String
 }
 
-model Products {
+model Restaurant {
   id    Int   @id @default(autoincrement())
   img   String
   name  String
   food  String
+  rating      Float    @default(0)
+  reviewCount Int      @default(0)
+  createdAt   DateTime @default(now())
+  reviews     Review[]
+  openHour    DateTime?
+  closeHour    DateTime?
+}
 
+model Review {
+  id           Int      @id @default(autoincrement())
+  rating       Int      // 1-5
+  comment      String
+  createdAt    DateTime @default(now())
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId Int
 }
