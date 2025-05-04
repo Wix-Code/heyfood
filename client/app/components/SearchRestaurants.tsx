@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { component } from '../dummyData';
+import { contextApi } from '../utils/context';
 
-const SearchRestaurants = ({setOpenSearch}:{setOpenSearch : React.Dispatch<React.SetStateAction<boolean>>;}) => {
+const SearchRestaurants = () => {
+  //const [openSearch, setOpenSearch] = useState<boolean>(false)
+    const context = useContext(contextApi);
+  
+    if (!context) {
+      throw new Error('MyComponent must be used within a ContextProvider');
+    }
+  
+    const { openSearch, setOpenSearch } = context;
   return (
-    <div className='absolute bg-[#FFFFFF] overflow-y-scroll w-full h-screen'>
+    <div className='absolute left-0 top-[80px] bg-[#FFFFFF] hide-scrollbar overflow-y-scroll w-full h-screen'>
       <div>
         <h1 className='ml-20 max-sm:ml-5 text-[22px] tracking-[1px] my-5 font-[600]'>Categories</h1>
         <div>

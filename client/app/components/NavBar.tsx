@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
@@ -9,10 +9,24 @@ import DesktopSideBar from './DesktopSideBar';
 import SearchAndSortNavbar from './SearchAndSortNavbar';
 import CloseIcon from '@mui/icons-material/Close';
 import SearchRestaurants from './SearchRestaurants';
+import { contextApi } from '../utils/context';
 
 const NavBar = () => {
   const [openDesktopSidebar, setOpenDesktopSidebar] = useState<boolean>(false)
-  const [openSearch, setOpenSearch] = useState<boolean>(false)
+ 
+  const context = useContext(contextApi);
+
+  if (!context) {
+    throw new Error('MyComponent must be used within a ContextProvider');
+  }
+
+  const { openSearch, setOpenSearch, setOpenSearchMobile, openSearchMobile } = context;
+
+  const handleClick = () => {
+    setOpenSearch(false);
+    setOpenSearchMobile(false);
+  }
+  
   return (
     <div style={{boxShadow: "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"}} className='sticky top-0 z-50 bg-[#FFFFFF]'>
       <div className='relative'>
@@ -33,8 +47,8 @@ const NavBar = () => {
             <input onClick={() => setOpenSearch(true)} type="text" className='w-full outline-0 text-[14px]' placeholder='Search restaurants or food' />
           </div>
           {
-            openSearch ? (
-              <button className='cursor-pointer max-sm:mr-5' onClick={() => setOpenSearch(false)}><CloseIcon /></button>
+            openSearch || openSearchMobile ? (
+              <button className='cursor-pointer max-sm:mr-5' onClick={handleClick}><CloseIcon /></button>
             ) : (
                 <>
                   <div className='flex max-lg:mr-5 gap-3 items-center'>
@@ -51,9 +65,9 @@ const NavBar = () => {
         </div>
       </div>
       <div className='pb-3'>
-        <SearchAndSortNavbar openSearch={openSearch} setOpenSearch={setOpenSearch} />
+        <SearchAndSortNavbar  />
         {
-          openSearch && ( <SearchRestaurants setOpenSearch={setOpenSearch} />)
+          openSearch && ( <SearchRestaurants />)
         }
       </div>
     </div>
