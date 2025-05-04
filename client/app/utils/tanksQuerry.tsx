@@ -7,29 +7,29 @@ interface Category {
   img:    string
 }
 
-const fetchCategories = async (): Promise<Category> => {
+const fetchCategories = async (): Promise<Category[]> => {
   const res = await fetch(`http://localhost:8800/api/category`);
   if (!res.ok) throw new Error('Failed to fetch categories');
   const response = await res.json();
   return response.data;
 };
 
-export const usePodcasts = () => {
-  return useQuery({
+export const useFetchCategories = () => {
+  return useQuery<Category[]>({
     queryKey: ['categories'],
     queryFn: fetchCategories,
   });
 };
 
-const fetchRestaurants = async (): Promise<Restaurant> => {
+const fetchRestaurants = async (): Promise<Restaurant[]> => {
   const res = await fetch(`http://localhost:8800/api/restaurants`);
   if (!res.ok) throw new Error('Failed to fetch restaurants');
   const response = await res.json();
-  return response.data;
+  return response.data; // Make sure response.data is an array
 };
 
 export const useFetchRestaurants = () => {
-  return useQuery({
+  return useQuery<Restaurant[]>({
     queryKey: ['restaurants'],
     queryFn: fetchRestaurants,
   });

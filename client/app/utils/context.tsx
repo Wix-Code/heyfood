@@ -7,14 +7,16 @@ import React, {
   Dispatch,
   SetStateAction,
 } from 'react';
-import { data } from '../dummyData';
+//import { data } from '../dummyData';
+import { useFetchRestaurants } from './tanksQuerry';
 
 export interface Restaurant {
   id: number;
   img: string;
-  title: string;
-  foods: string;
-  deliveryFee: string;
+  openHour: string;
+  closeHour: string;
+  shop: string;
+  discount: string;
   name: string;
   rating?: number;
   createdAt?: string;
@@ -22,7 +24,7 @@ export interface Restaurant {
   // add other product fields if necessary
 };
 
-type SortOption = 'highest' | 'newest' | 'most-popular' | null;
+type SortOption = 'highest' | 'newest' | 'most-popular' | 'oldest' | null;
 
 interface AppContextType {
   openSearch: boolean;
@@ -49,6 +51,10 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
   const [openSearchMobile, setOpenSearchMobile] = useState(false);
   const [filterCategory, setFilterCategory] = useState<string | null>(null);
   const [sortedBy, setSortedBy] = useState<SortOption>(null);
+
+  const { data =[], error, isLoading } = useFetchRestaurants()
+  console.log(data, "erroorr")
+  
 
   const handleCardClick = (category: string) => {
     setFilterCategory(category);
@@ -82,6 +88,12 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
               new Date(b.createdAt ?? 0).getTime() -
               new Date(a.createdAt ?? 0).getTime()
           );
+          break;
+        case 'oldest':
+          filtered.sort((a, b) =>
+            new Date(a.createdAt ?? 0).getTime() -
+            new Date(b.createdAt ?? 0).getTime()
+          )
           break;
         case 'most-popular':
           filtered.sort((a, b) => (b?.popularity ?? 0) - (a?.popularity ?? 0));

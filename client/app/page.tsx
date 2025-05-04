@@ -65,6 +65,7 @@ import { component, data } from './dummyData';
 import Discounts from './components/Discounts';
 import AllRestaurants from './components/AllRestaurants';
 import { contextApi } from './utils/context';
+import { useFetchCategories } from './utils/tanksQuerry';
 
 
 const Page = () => {
@@ -75,6 +76,8 @@ const Page = () => {
   }
 
   const { filteredProducts, handleSortChange, handleCardClick, filterCategory, sortedBy } = context;
+  const { data : categories, error, isLoading } = useFetchCategories()
+  console.log(categories, "datatta")
   /*const [filterCategory, setFilterCategory] = useState<string | null>(null);;
   const [sortedBy, setSortedBy] = useState(null);
 
@@ -117,7 +120,7 @@ const Page = () => {
   };
 
   const filteredProducts = getFilteredProducts(); */
-
+  if(isLoading) return <p>Loading...</p>
   return (
     <div>
       <div className='flex max-w-[1200px] max-lg:mx-5 m-auto items-center my-6 gap-5'>
@@ -128,7 +131,7 @@ const Page = () => {
 
       {/* Filter Cards */}
       <div className='flex hide-scrollbar max-w-[1200px] max-lg:mx-5 overflow-x-scroll m-auto justify-between gap-2 items-center'>
-        {component.map((item) => (
+        {categories?.map((item) => (
           <div key={item.id} className='w-fit p-3 max-sm:p-4 hover:bg-[#f7f7f7] flex flex-col justify-center items-center gap-2 bg-[#d4d4d4] max-xl:hover:bg-[#f7f7f7] cursor-pointer' onClick={() => handleCardClick(item.name)}>
             <img className='w-[40px] h-[40px] object-cover' src={item.img} alt={item.name} />
             <p className='text-center max-sm:text-[11px] text-[13px] font-bold tracking-[1px]'>{item.name}</p>
@@ -171,8 +174,8 @@ const Page = () => {
               {filteredProducts.map(product => (
                 <div key={product.id} className='flex cursor-pointer flex-col gap-[2px]'>
                   <img className='h-[110px] rounded-[4px] w-full object-cover' src={product.img} alt="" />
-                  <p className='font-[600] text-[17px]'>{product.title}</p>
-                  <p className='text-[#757575] text-[14px]'>{product.foods}</p>
+                  <p className='font-[600] text-[17px]'>{product.shop}</p>
+                  <p className='text-[#757575] text-[14px]'>{product.name}</p>
                   <p className='text-[15px]'>4.2 • 6607+ Ratings</p>
                   <p>{product.rating}</p>
                 </div>

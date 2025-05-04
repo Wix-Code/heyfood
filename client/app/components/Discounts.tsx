@@ -2,11 +2,14 @@ import React, { useRef, useState, useEffect } from 'react';
 import WestIcon from '@mui/icons-material/West';
 import EastIcon from '@mui/icons-material/East';
 import { data } from '../dummyData';
+import { useFetchRestaurants } from '../utils/tanksQuerry';
 // Adjust path as needed
 
 const Discounts = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [itemsPerSlide, setItemsPerSlide] = useState(3)
+  const { data: restaurants =[], error, isLoading } = useFetchRestaurants()
+  
 
   // Responsive items per slide
   useEffect(() => {
@@ -33,7 +36,7 @@ const Discounts = () => {
 
   const getSlideItems = () => {
     const start = currentSlide * itemsPerSlide
-    return data.slice(start, start + itemsPerSlide)
+    return restaurants.slice(start, start + itemsPerSlide)
   }
 
   return (
@@ -59,15 +62,15 @@ const Discounts = () => {
       </div>
 
       <div className="flex justify-between max-lg:w-full gap-5 transition-all duration-300">
-        {getSlideItems().map((product) => (
+        {getSlideItems().filter((restaurant) => restaurant.discount !== null).map((product: any) => (
           <div key={product.id} className="flex w-full cursor-pointer flex-col gap-[2px]">
             <img
               className="h-[110px] rounded-[4px] w-full object-cover"
               src={product.img}
               alt=""
             />
-            <p className="font-[600] text-[17px]">{product.title}</p>
-            <p className="text-[#757575] text-[14px]">{product.foods}</p>
+            <p className="font-[600] text-[17px]">{product.shop}</p>
+            <p className="text-[#757575] text-[14px]">{product.name}</p>
             <p className="text-[15px]">4.2 • 6607+ Ratings</p>
           </div>
         ))}
