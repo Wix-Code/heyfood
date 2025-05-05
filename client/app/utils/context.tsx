@@ -21,7 +21,6 @@ export interface Restaurant {
   rating?: number;
   createdAt?: string;
   reviewCount?: number;
-  // add other product fields if necessary
 };
 
 type SortOption = 'highest' | 'newest' | 'most-popular' | 'oldest' | null;
