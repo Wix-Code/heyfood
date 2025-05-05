@@ -80,7 +80,7 @@ const Page = () => {
             </>
           ) : (
               <div>
-                <Link href="/"><button className='py-2 px-5 cursor-pointer text-[18px] font-[600] mb-5 bg-[#f1f1f1]'>Reset</button></Link>
+                <Link href="/"><button className='py-2 max-xl:mx-5 px-5 cursor-pointer text-[18px] font-[600] mb-5 bg-[#f1f1f1]'>Reset</button></Link>
                 <div className='grid grid-cols-3 max-md:grid-cols-1 max-lg:mx-5 gap-6'>
                 {filteredProducts.map(product => (
                   <div key={product.id} className='flex cursor-pointer flex-col gap-[2px]'>

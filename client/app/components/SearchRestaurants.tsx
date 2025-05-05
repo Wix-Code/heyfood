@@ -11,7 +11,7 @@ const SearchRestaurants = () => {
   const { data: categories, isLoading } = useFetchCategories();
 
   return (
-    <div className='absolute left-0 top-[130px] bg-[#FFFFFF] hide-scrollbar overflow-y-scroll w-full h-screen z-50'>
+    <div className='absolute left-0 top-[130px] bg-[#FFFFFF] hide-scrollbar overflow-y-scroll w-full h-screen z-10'>
       <div className='py-6'>
         {isSearching ? (
           <div>
@@ -19,11 +19,11 @@ const SearchRestaurants = () => {
             {restaurantResults.length > 0 ? (
               restaurantResults.map((restaurant: any) => (
                 <div key={restaurant.id} className='py-6 px-20 max-xl:px-5 flex gap-3 cursor-pointer hover:bg-[#f7f7f7] border-b border-[#e9e9e9]'>                  
-                  <img className='w-[70px] h-[70px] object-cover' src={restaurant.img} alt="" />
+                  <img className='w-[70px] max-sm:w-[40px] max-sm:h-[40px] h-[70px] object-cover' src={restaurant.img} alt="" />
                   <div>
-                  <p className="font-[600] text-[17px]">{restaurant.shop}</p>
-                  <p className="text-[#757575] text-[14px]">{restaurant.name}</p>
-                  <p className='text-[15px] flex items-center gap-2'><GradeIcon color='success'/>{restaurant.rating} Ratings</p>
+                  <p className="font-[600]  max-sm:text-[15px] text-[17px]">{restaurant.shop}</p>
+                  <p className="text-[#757575] max-sm:text-[12px] text-[14px]">{restaurant.name}</p>
+                  <p className='text-[15px]  max-sm:text-[13px] flex items-center gap-2'><GradeIcon color='success'/>{restaurant.rating} Ratings</p>
                   </div>
                 </div>
               ))

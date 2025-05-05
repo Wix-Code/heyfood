@@ -22,7 +22,7 @@ const DesktopSideBar = ({
           <p className='text-[16px] cursor-pointer px-6 py-4 hover:bg-[#f1f1f1] font-[600] text-[#111111]'>Become a delivery rider</p>
           <p className='text-[16px] cursor-pointer px-6 py-4 hover:bg-[#f1f1f1] font-[600] text-[#111111]'>Go to Homepage</p>
         </div>
-        <div className='ml-6'>
+        <div className='ml-6 max-sm:mb-5'>
           <div className='flex mb-4 items-center gap-3'>
             <img src="https://heyfood.africa/icons/new/logo-circle-green.svg" alt="heyfood icon" />
             <p className='text-[16px] font-[600] text-[#111111]'>Experience the <br />
