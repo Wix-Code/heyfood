@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "./components/NavBar";
 import ContextProvider from "./utils/context";
 import ClientProvider from "./utils/StoreProvider";
+import Footer from "./components/Footer";
 
 const poppins = Poppins({
   weight: ['400'],
@@ -29,6 +30,7 @@ export default function RootLayout({
         <ClientProvider>
           <NavBar />
           {children}
+          <Footer />
         </ClientProvider>
       </body>
     </html>

@@ -66,6 +66,7 @@ import Discounts from './components/Discounts';
 import AllRestaurants from './components/AllRestaurants';
 import { contextApi } from './utils/context';
 import { useFetchCategories } from './utils/tanksQuerry';
+import FreeDrinks from './components/FreeDrinks';
 
 
 const Page = () => {
@@ -163,10 +164,11 @@ const Page = () => {
           </div>
         </div>
 
-        <div className='flex-3 max-md:w-full flex flex-col gap-10'>
+        <div className='flex-3 max-md:w-full overflow-hidden flex flex-col gap-10'>
           {(!filterCategory && !sortedBy) ? (
             <>
               <Discounts />
+              <FreeDrinks />
               <AllRestaurants />
             </>
           ) : (
