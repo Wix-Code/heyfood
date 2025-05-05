@@ -7,7 +7,7 @@ import React, {
   Dispatch,
   SetStateAction,
 } from 'react';
-//import { data } from '../dummyData';
+
 import { useFetchRestaurants } from './tanksQuerry';
 
 export interface Restaurant {
@@ -59,11 +59,11 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
   const [openSearchMobile, setOpenSearchMobile] = useState(false);
   const [filterCategory, setFilterCategory] = useState<string | null>(null);
   const [sortedBy, setSortedBy] = useState<SortOption>(null);
-
   const [searchTerm, setSearchTerm] = useState('');
   const [restaurantResults, setRestaurantResults] = useState<Restaurant[]>([]);
   const [isSearching, setIsSearching] = useState(false);
 
+  // SEARCH FUNCTION
   const handleSearch = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && searchTerm.trim()) {
       setIsSearching(true);
@@ -81,12 +81,13 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
   const { data =[], error, isLoading } = useFetchRestaurants()
   console.log(data, "erroorr")
   
-
+  
   const handleCardClick = (category: string) => {
     setFilterCategory(category);
     setSortedBy(null);
   };
 
+  
   const handleSortChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSortedBy(e.target.value as SortOption);
     setFilterCategory(null);
@@ -149,7 +150,6 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
         setSortedBy,
         handleSortChange,
         handleCardClick,
-
         setSearchTerm,
         searchTerm,
         handleSearch,
@@ -157,7 +157,6 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
         restaurantResults,
         isSearching,
         setIsSearching,
-
       }}
     >
       {children}

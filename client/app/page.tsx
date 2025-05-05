@@ -28,7 +28,8 @@ const Page = () => {
   const { data : categories, error, isLoading } = useFetchCategories()
   console.log(categories, "datatta")
  
-  if(isLoading) return <Spinner />
+  if (isLoading) return <Spinner />
+  
   return (
     <div>
       <div className='flex max-w-[1200px] max-lg:mx-5 m-auto items-center my-6 gap-5'>
@@ -37,7 +38,7 @@ const Page = () => {
       </div>
       <hr className='h-[1px] mb-6 w-full bg-[#f3f3f3] border-0' />
 
-      {/* Filter Cards */}
+      
       <div className='flex hide-scrollbar max-w-[1200px] max-lg:mx-5 overflow-x-scroll m-auto justify-between gap-2 items-center'>
         {categories?.map((item) => (
           <div key={item.id} onClick={() => handleCardClick(item.name)} className={`w-fit p-3 ${filterCategory === item.name ? 'bg-[#f7f7f7] border border-[#eeeeee]' : 'hover:bg-[#f7f7f7]'} max-sm:p-4 hover:bg-[#f7f7f7] flex flex-col justify-center items-center gap-2 max-xl:hover:bg-[#f7f7f7] cursor-pointer`}>
@@ -47,7 +48,7 @@ const Page = () => {
         ))}
       </div>
 
-      {/* Layout */}
+     
       <div className='flex max-w-[1200px] max-sm:flex-col m-auto mt-6'>
         <div className='flex-1 max-sm:hidden max-lg:mx-5'>
           <div className='flex flex-col sticky top-[100px] gap-4'>
