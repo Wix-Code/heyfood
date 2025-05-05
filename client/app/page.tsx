@@ -61,7 +61,7 @@ export default page */
 "use client"
 import React, { useContext, useState } from 'react';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
-import { component, data } from './dummyData';
+//import { component, data } from './dummyData';
 import Discounts from './components/Discounts';
 import AllRestaurants from './components/AllRestaurants';
 import { contextApi } from './utils/context';
@@ -154,8 +154,8 @@ const Page = () => {
                   onChange={handleSortChange}
                 >
                   <FormControlLabel value="most-popular" control={<Radio size="small" />} label="Most Popular" />
-                  <FormControlLabel value="highest" control={<Radio size="small" />} label="Highest rate" />
-                  <FormControlLabel value="newest" control={<Radio size="small" />} label="Newest" />
+                  <FormControlLabel value="highest" control={<Radio size="small" />} label="Highest rated" />
+                  <FormControlLabel value="oldest" control={<Radio size="small" />} label="Oldest" />
                   <FormControlLabel value="newest" control={<Radio size="small" />} label="Newest" />
                 </RadioGroup>
               </FormControl>
@@ -176,7 +176,7 @@ const Page = () => {
                   <img className='h-[110px] rounded-[4px] w-full object-cover' src={product.img} alt="" />
                   <p className='font-[600] text-[17px]'>{product.shop}</p>
                   <p className='text-[#757575] text-[14px]'>{product.name}</p>
-                  <p className='text-[15px]'>4.2 • 6607+ Ratings</p>
+                  <p className='text-[15px]'>{product.rating} Ratings</p>
                   <p>{product.rating}</p>
                 </div>
               ))}

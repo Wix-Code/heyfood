@@ -1,4 +1,4 @@
-import { Restaurant } from "./utils/context"
+/*import { Restaurant } from "./utils/context"
 
 export const data = [
   {
@@ -128,4 +128,4 @@ export const component = [
     name: "Juice",
     img: "/pic/images.jpg"
   },
-]
+] */

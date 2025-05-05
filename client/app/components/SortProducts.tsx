@@ -33,7 +33,6 @@ const SortProducts = ({ setOpenSort }: { setOpenSort: React.Dispatch<React.SetSt
               <FormControlLabel onClick={() => setOpenSort(false)} value="highest" control={<Radio size="small" />} label="Highest Rated" />
               <FormControlLabel onClick={() => setOpenSort(false)} value="newest" control={<Radio size="small" />} label="Newest" />
               <FormControlLabel onClick={() => setOpenSort(false)} value="oldest" control={<Radio size="small" />} label="Oldest" />
-              <FormControlLabel onClick={() => setOpenSort(false)} value="newest" control={<Radio size="small" />} label="Most Rated" />
             </RadioGroup>
           </FormControl>
         </div>

@@ -13,7 +13,7 @@ const SearchAndSortNavbar = () => {
     throw new Error('MyComponent must be used within a ContextProvider');
   }
 
-  const { openSearchMobile, setOpenSearchMobile } = context;
+  const { openSearchMobile, setOpenSearchMobile, } = context;
   const [openSort, setOpenSort] = useState(false)
   return (
     <div className='hidden max-sm:mx-5 justify-between max-sm:flex gap-3'>

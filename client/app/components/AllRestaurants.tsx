@@ -18,7 +18,7 @@ const AllRestaurants = () => {
                 <img className='h-[110px] rounded-[4px] w-full object-cover' src={product.img} alt="" />
                 <p className='font-[600] text-[17px]'>{product.shop}</p>
                 <p className='text-[#757575] text-[14px]'>{product.name}</p>
-                <p className='text-[15px]'>4.2 • 6607+ Ratings</p>
+                <p className='text-[15px]'>{product.rating} Ratings</p>
                 <div className='absolute left-3 top-3 flex flex-col justify-between'>
                   <p className='text-[13px] text-[#FFFFFF]'>{formatTime(product.openHour)} - {formatTime(product.closeHour)}</p>
                   {
