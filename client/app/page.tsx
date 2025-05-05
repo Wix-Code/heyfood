@@ -11,6 +11,9 @@ import { formatTime } from './utils/timeFunction';
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 import GradeIcon from '@mui/icons-material/Grade';
 import Link from 'next/link';
+import PartyJellof from './components/PartyJellof';
+import Spinner from './components/Spinner';
+
 
 
 
@@ -25,7 +28,7 @@ const Page = () => {
   const { data : categories, error, isLoading } = useFetchCategories()
   console.log(categories, "datatta")
  
-  if(isLoading) return <p>Loading...</p>
+  if(isLoading) return <Spinner />
   return (
     <div>
       <div className='flex max-w-[1200px] max-lg:mx-5 m-auto items-center my-6 gap-5'>
@@ -75,6 +78,7 @@ const Page = () => {
           {(!filterCategory && !sortedBy) ? (
             <>
               <Discounts />
+              <PartyJellof />
               <FreeDrinks />
               <AllRestaurants />
             </>

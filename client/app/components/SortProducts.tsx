@@ -13,7 +13,7 @@ const SortProducts = ({ setOpenSort }: { setOpenSort: React.Dispatch<React.SetSt
   
     const { handleSortChange} = context;
   return (
-    <div className='absolute  left-0 h-screen bg-[#00000054] w-full top-[132px]'>
+    <div className='absolute  left-0 h-screen bg-[#00000054] z-20 w-full top-[132px]'>
       <div className='flex px-5  pt-8 pb-10 bg-[#FFFFFF] flex-col sticky top-[80px] gap-2'>
         <div className='flex items-center justify-between'>
           <div className='flex items-center gap-2'>

@@ -18,6 +18,7 @@ export interface Restaurant {
   shop: string;
   discount: string;
   freeDrink: boolean;
+  partyJellof: boolean;
   name: string;
   rating?: number;
   createdAt?: string;
@@ -59,23 +60,23 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
   const [filterCategory, setFilterCategory] = useState<string | null>(null);
   const [sortedBy, setSortedBy] = useState<SortOption>(null);
 
-   const [searchTerm, setSearchTerm] = useState('');
-    const [restaurantResults, setRestaurantResults] = useState<Restaurant[]>([]);
-    const [isSearching, setIsSearching] = useState(false);
-  
-    const handleSearch = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === 'Enter' && searchTerm.trim()) {
-        setIsSearching(true);
-        try {
-          const res = await fetch(`https://heyfood.onrender.com/api/restaurants?search=${encodeURIComponent(searchTerm.trim())}`);
-          const data = await res.json();
-          setRestaurantResults(data.data || []);
-        } catch (error) {
-          console.error('Search failed:', error);
-        }
+  const [searchTerm, setSearchTerm] = useState('');
+  const [restaurantResults, setRestaurantResults] = useState<Restaurant[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
+
+  const handleSearch = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && searchTerm.trim()) {
+      setIsSearching(true);
+      try {
+        const res = await fetch(`https://heyfood.onrender.com/api/restaurants?search=${encodeURIComponent(searchTerm.trim())}`);
+        const data = await res.json();
+        setRestaurantResults(data.data || []);
+      } catch (error) {
+        console.error('Search failed:', error);
       }
-    };
-  
+    }
+  };
+
 
   const { data =[], error, isLoading } = useFetchRestaurants()
   console.log(data, "erroorr")

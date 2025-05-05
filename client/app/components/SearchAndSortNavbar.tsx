@@ -27,7 +27,7 @@ const SearchAndSortNavbar = () => {
               setRestaurantResults([]);
             }
           }}
-          onKeyDown={handleSearch} type="text" className='w-full outline-0 text-[14px]' placeholder='Search restaurants or food' />
+          onKeyDown={handleSearch} type="text" className='w-full outline-0 text-[14px]' placeholder='Search restaurants' />
       </div>
       <button className='text-right' onClick={() => setOpenSort(!openSort)}><SwapVertOutlinedIcon /></button>
       <div>

@@ -7,46 +7,43 @@ import EastIcon from "@mui/icons-material/East";
 import { useFetchRestaurants } from "../utils/tanksQuerry";
 import { formatTime } from "../utils/timeFunction";
 import GradeIcon from '@mui/icons-material/Grade';
-
-
-const Discounts = () => {
-  const sliderRef = useRef<any>(null);
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const { data : restaurants } = useFetchRestaurants()
-
-  const filteredProducts = restaurants?.filter((product) => product.discount !== null);
-
-  const settings = {
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    infinite: false,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
+const PartyJellof = () => {
+   const sliderRef = useRef<any>(null);
+    const [currentSlide, setCurrentSlide] = useState(0);
+  
+    const { data : restaurants } = useFetchRestaurants()
+  
+    const filteredProducts = restaurants?.filter((product) => product.freeDrink === true);
+  
+    const settings = {
+      slidesToShow: 3,
+      slidesToScroll: 3,
+      infinite: false,
+      arrows: false,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+          },
         },
-      },
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1.5,
+        {
+          breakpoint: 640,
+          settings: {
+            slidesToShow: 1.5,
+          },
         },
-      },
-    ],
-    afterChange: (index: number) => setCurrentSlide(index),
-  };
-
-  const handleNext = () => sliderRef.current.slickNext();
-  const handlePrev = () => sliderRef.current.slickPrev();
-
+      ],
+      afterChange: (index: number) => setCurrentSlide(index),
+    };
+  
+    const handleNext = () => sliderRef.current.slickNext();
+    const handlePrev = () => sliderRef.current.slickPrev();
   return (
     <div className="max-sm:mx-5 max-lg:mr-5 overflow-hidden">
-      <div className="flex items-center justify-between mb-10">
+      <div className="flex items-center mb-10 justify-between">
         <h1 className="text-[28px] max-sm:text-[20px] tracking-[1px] font-[800]">
-          Discounts 4 U! 🤩
+        Party Jollof in IB
         </h1>
         <div className="flex gap-2">
           <button
@@ -89,7 +86,7 @@ const Discounts = () => {
         </Slider>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Discounts;
+export default PartyJellof

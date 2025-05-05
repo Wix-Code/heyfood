@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { contextApi } from '../utils/context';
 import { useFetchCategories, useFetchRestaurants } from '../utils/tanksQuerry';
 import GradeIcon from '@mui/icons-material/Grade';
+import Spinner from './Spinner';
 
 const SearchRestaurants = () => {
   const context = useContext(contextApi);
@@ -9,9 +10,9 @@ const SearchRestaurants = () => {
 
   const { setIsSearching, searchTerm, isSearching, restaurantResults,setSearchTerm, handleSearch,setRestaurantResults   } = context;
   const { data: categories, isLoading } = useFetchCategories();
-
+  
   return (
-    <div className='absolute left-0 top-[130px] bg-[#FFFFFF] hide-scrollbar overflow-y-scroll w-full h-screen z-10'>
+    <div className='absolute left-0 top-[120px] bg-[#FFFFFF] hide-scrollbar overflow-y-scroll w-full h-screen z-10'>
       <div className='py-6'>
         {isSearching ? (
           <div>
@@ -28,7 +29,7 @@ const SearchRestaurants = () => {
                 </div>
               ))
             ) : (
-              <p className='text-gray-500 max-xl:px-5'>No restaurants found for “{searchTerm}”.</p>
+              <p className='text-gray-500 mx-20 max-xl:px-5'>No restaurants found for “{searchTerm}”.</p>
             )}
           </div>
         ) : (
