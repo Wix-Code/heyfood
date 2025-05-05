@@ -38,6 +38,13 @@ interface AppContextType {
   setSortedBy: Dispatch<SetStateAction<SortOption>>;
   handleSortChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleCardClick: (category: string) => void;
+  searchTerm: string;
+  setSearchTerm: Dispatch<SetStateAction<string>>;
+  restaurantResults: Restaurant[];
+  setRestaurantResults: Dispatch<SetStateAction<Restaurant[]>>;
+  isSearching: boolean;
+  setIsSearching: Dispatch<SetStateAction<boolean>>;
+  handleSearch: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 export const contextApi = createContext<AppContextType | null>(null);
@@ -51,6 +58,24 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
   const [openSearchMobile, setOpenSearchMobile] = useState(false);
   const [filterCategory, setFilterCategory] = useState<string | null>(null);
   const [sortedBy, setSortedBy] = useState<SortOption>(null);
+
+   const [searchTerm, setSearchTerm] = useState('');
+    const [restaurantResults, setRestaurantResults] = useState<Restaurant[]>([]);
+    const [isSearching, setIsSearching] = useState(false);
+  
+    const handleSearch = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Enter' && searchTerm.trim()) {
+        setIsSearching(true);
+        try {
+          const res = await fetch(`https://heyfood.onrender.com/api/restaurants?search=${encodeURIComponent(searchTerm.trim())}`);
+          const data = await res.json();
+          setRestaurantResults(data.data || []);
+        } catch (error) {
+          console.error('Search failed:', error);
+        }
+      }
+    };
+  
 
   const { data =[], error, isLoading } = useFetchRestaurants()
   console.log(data, "erroorr")
@@ -123,6 +148,15 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
         setSortedBy,
         handleSortChange,
         handleCardClick,
+
+        setSearchTerm,
+        searchTerm,
+        handleSearch,
+        setRestaurantResults,
+        restaurantResults,
+        isSearching,
+        setIsSearching,
+
       }}
     >
       {children}

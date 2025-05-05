@@ -13,13 +13,21 @@ const SearchAndSortNavbar = () => {
     throw new Error('MyComponent must be used within a ContextProvider');
   }
 
-  const { openSearchMobile, setOpenSearchMobile, } = context;
+  const { openSearchMobile, setOpenSearchMobile, handleSearch, setIsSearching, setSearchTerm, setRestaurantResults } = context;
   const [openSort, setOpenSort] = useState(false)
   return (
     <div className='hidden max-sm:mx-5 justify-between max-sm:flex gap-3'>
       <div className='bg-[#ececec] px-3 py-[10px] items-center rounded-[40px] flex gap-2 w-full'>
         <SearchIcon />
-        <input onClick={() => setOpenSearchMobile(true)} type="text" className='w-full outline-0 text-[14px]' placeholder='Search restaurants or food' />
+        <input onClick={() => setOpenSearchMobile(true)}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            if (e.target.value === '') {
+              setIsSearching(false); 
+              setRestaurantResults([]);
+            }
+          }}
+          onKeyDown={handleSearch} type="text" className='w-full outline-0 text-[14px]' placeholder='Search restaurants or food' />
       </div>
       <button className='text-right' onClick={() => setOpenSort(!openSort)}><SwapVertOutlinedIcon /></button>
       <div>

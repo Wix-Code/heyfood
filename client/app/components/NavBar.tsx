@@ -20,13 +20,13 @@ const NavBar = () => {
     throw new Error('MyComponent must be used within a ContextProvider');
   }
 
-  const { openSearch, setOpenSearch, setOpenSearchMobile, openSearchMobile } = context;
+  const { openSearch,setIsSearching, searchTerm, isSearching, restaurantResults,setSearchTerm, handleSearch,setRestaurantResults, setOpenSearch, setOpenSearchMobile, openSearchMobile } = context;
 
   const handleClick = () => {
     setOpenSearch(false);
     setOpenSearchMobile(false);
   }
-  
+
   return (
     <div style={{boxShadow: "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px"}} className='sticky top-0 z-50 bg-[#FFFFFF]'>
       <div className='relative'>
@@ -44,7 +44,15 @@ const NavBar = () => {
           </div>
           <div className='bg-[#ececec] max-sm:hidden max-lg:w-[200px] px-3 py-[10px] items-center rounded-[40px] flex gap-2 w-[400px]'>
             <SearchIcon />
-            <input onClick={() => setOpenSearch(true)} type="text" className='w-full outline-0 text-[14px]' placeholder='Search restaurants or food' />
+            <input onClick={() => setOpenSearch(true)} value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                if (e.target.value === '') {
+                  setIsSearching(false); // reset to category view
+                  setRestaurantResults([]);
+                }
+              }}
+              onKeyDown={handleSearch} type="text" className='w-full outline-0 text-[14px]' placeholder='Search restaurants or food' />
           </div>
           {
             openSearch || openSearchMobile ? (
