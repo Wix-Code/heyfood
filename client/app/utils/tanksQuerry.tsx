@@ -8,7 +8,7 @@ interface Category {
 }
 
 const fetchCategories = async (): Promise<Category[]> => {
-  const res = await fetch(`http://localhost:8800/api/category`);
+  const res = await fetch(`https://heyfood.onrender.com/api/category`);
   if (!res.ok) throw new Error('Failed to fetch categories');
   const response = await res.json();
   return response.data;
@@ -22,7 +22,7 @@ export const useFetchCategories = () => {
 };
 
 const fetchRestaurants = async (): Promise<Restaurant[]> => {
-  const res = await fetch(`http://localhost:8800/api/restaurants`);
+  const res = await fetch(`https://heyfood.onrender.com/api/restaurants`);
   if (!res.ok) throw new Error('Failed to fetch restaurants');
   const response = await res.json();
   return response.data; // Make sure response.data is an array
