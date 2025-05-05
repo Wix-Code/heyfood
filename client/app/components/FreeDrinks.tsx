@@ -43,7 +43,7 @@ const FreeDrinks = () => {
     <div className="max-sm:mx-5 max-lg:mr-5 overflow-hidden">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-[28px] max-sm:text-[20px] tracking-[1px] font-[800]">
-          Offer of the Day! 🤩
+          Free Drinks Offer! 🤩
         </h1>
         <div className="flex gap-2">
           <button
