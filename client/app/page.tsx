@@ -67,6 +67,9 @@ import AllRestaurants from './components/AllRestaurants';
 import { contextApi } from './utils/context';
 import { useFetchCategories } from './utils/tanksQuerry';
 import FreeDrinks from './components/FreeDrinks';
+import { formatTime } from './utils/timeFunction';
+import GradeIcon from '@mui/icons-material/Grade';
+
 
 
 const Page = () => {
@@ -143,7 +146,7 @@ const Page = () => {
       {/* Layout */}
       <div className='flex max-w-[1200px] max-sm:flex-col m-auto mt-6'>
         <div className='flex-1 max-sm:hidden max-lg:mx-5'>
-          <div className='flex flex-col sticky top-[80px] gap-4'>
+          <div className='flex flex-col sticky top-[100px] gap-4'>
             <h2 className='text-[#000000] font-[800] text-[24px]'>All Stores</h2>
             <p className='text-[#757575] text-[18px]'>{`(${filteredProducts.length} Stores)`}</p>
             <div>
@@ -178,8 +181,13 @@ const Page = () => {
                   <img className='h-[110px] rounded-[4px] w-full object-cover' src={product.img} alt="" />
                   <p className='font-[600] text-[17px]'>{product.shop}</p>
                   <p className='text-[#757575] text-[14px]'>{product.name}</p>
-                  <p className='text-[15px]'>{product.rating} Ratings</p>
-                  <p>{product.rating}</p>
+                  <p className='text-[15px] flex items-center gap-2'><GradeIcon color='success'/>{product.rating} Ratings</p>
+                  <div className='absolute left-3 top-3 flex flex-col justify-between gap-6'>
+                    <p className='text-[13px]  px-3 py-1  bg-[#e68201] text-[#FFFFFF]'>{formatTime(product.openHour)} - {formatTime(product.closeHour)}</p>
+                    {
+                      product.discount !== null && (<p className='text-[13px] w-fit text-[#FFFFFF] px-3 py-1 bg-[#0c0c0c]'>{product.discount}</p>)
+                    }
+                  </div>
                 </div>
               ))}
             </div>

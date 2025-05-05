@@ -5,6 +5,9 @@ import "slick-carousel/slick/slick-theme.css";
 import WestIcon from "@mui/icons-material/West";
 import EastIcon from "@mui/icons-material/East";
 import { useFetchRestaurants } from "../utils/tanksQuerry";
+import { formatTime } from "../utils/timeFunction";
+import GradeIcon from '@mui/icons-material/Grade';
+
 
 const Discounts = () => {
   const sliderRef = useRef<any>(null);
@@ -41,7 +44,7 @@ const Discounts = () => {
 
   return (
     <div className="max-sm:mx-5 max-lg:mr-5 overflow-hidden">
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-10">
         <h1 className="text-[28px] max-sm:text-[20px] tracking-[1px] font-[800]">
           Offer of the Day! 🤩
         </h1>
@@ -73,7 +76,13 @@ const Discounts = () => {
                 />
                 <p className="font-[600] text-[17px]">{product.shop}</p>
                 <p className="text-[#757575] text-[14px]">{product.name}</p>
-                <p className="text-[15px]">4.2 • 6607+ Ratings</p>
+                <p className='text-[15px] flex items-center gap-2'><GradeIcon color='success'/>{product.rating} Ratings</p>
+                <div className='absolute left-3 top-3 flex flex-col justify-between gap-6'>
+                  <p className='text-[13px]  px-3 py-1  bg-[#e68201] text-[#FFFFFF]'>{formatTime(product.openHour)} - {formatTime(product.closeHour)}</p>
+                  {
+                    product.discount !== null && (<p className='text-[13px] w-fit text-[#FFFFFF] px-3 py-1 bg-[#0c0c0c]'>{product.discount}</p>)
+                  }
+                </div>
               </div>
             </div>
           ))}

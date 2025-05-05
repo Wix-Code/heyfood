@@ -17,6 +17,7 @@ export interface Restaurant {
   closeHour: string;
   shop: string;
   discount: string;
+  freeDrink: boolean;
   name: string;
   rating?: number;
   createdAt?: string;
